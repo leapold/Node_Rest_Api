@@ -9,3 +9,5 @@ npm install --save-dev nodemon
     
 "start:server":"nodemon server.js"
 npm run start:server
+
+npm install
