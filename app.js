@@ -6,8 +6,28 @@ const morgan = require('morgan');
 
 const bodyParser = require("body-parser");
 
+//npm install --save mongoose
+const mongoose = require("mongoose");
+
 const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders');
+
+ 
+ 
+const connect = async () => {
+    try {
+      await mongoose.connect(process.env.MONGO_ATLAS_PW);
+      console.log("Connected to mongoDB.");
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  };
+  
+  mongoose.connection.on("disconnected", () => {
+    console.log("mongoDB disconnected!");
+  });
+ 
 
 //all request pass morgan
 //npm install --save morgan
@@ -47,5 +67,11 @@ app.use((error, req, res, next) => {
         }
     });
 });
+
+
+app.listen(8800, () => {
+    connect();
+    console.log("Connected to backend.");
+  });
 
 module.exports = app;
