@@ -33,6 +33,8 @@ const connect = async () => {
 //npm install --save morgan
 app.use(morgan('dev'));
 
+app.use('/uploads',express.static('uploads'));
+
 //npm install --save body-parser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
