@@ -9,6 +9,9 @@ const Product = require("../models/product");
 router.get("/", (req, res, next) => {
   Order.find()
     .select("product quantity _id")
+    // name of ref property  product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
+    // second is list of prop that you want to get
+    .populate('product', 'name')// so will return only name+id
     .exec()
     .then(docs => {
       res.status(200).json({
@@ -40,7 +43,8 @@ router.post("/", (req, res, next) => {
         return res.status(404).json({ message: "Product not found" });
       }
       const order = new Order({
-        _id: mongoose.Types.ObjectId(),
+        //should generate new id
+        _id: new mongoose.Types.ObjectId(),
         quantity: req.body.quantity,
         product: req.body.productId
       });
@@ -71,6 +75,7 @@ router.post("/", (req, res, next) => {
 
 router.get("/:orderId", (req, res, next) => {
   Order.findById(req.params.orderId)
+    .populate('product')//populate all products fiels
     .exec()
     .then(order => {
       if (!order) {
