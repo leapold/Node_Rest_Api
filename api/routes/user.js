@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 // npm install bcrypt --save
 const bcrypt = require("bcrypt");
 
+//npm install jsonwebtoken --save
+const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
  
@@ -48,6 +50,10 @@ router.post("/login", (req, res, next) => {
       .then(user => {//return user array
         if (user.length < 1) {
           return res.status(401).json({ message: "Auth failed" });
+        }
+        else
+        {
+            console.log("user found");
         }
         bcrypt.compare(req.body.password, user[0].password, (err, result) => {
           if (err) {
