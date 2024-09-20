@@ -1,5 +1,6 @@
 {
     "env": {
-        "MONGO_ATLAS_PW": "mongodb+srv://koylerleonid:1234@node-rest-shop.rnh69.mongodb.net/?retryWrites=true&w=majority&appName=node-rest-shop"
+        "MONGO_ATLAS_PW": "mongodb+srv://koylerleonid:1234@node-rest-shop.rnh69.mongodb.net/?retryWrites=true&w=majority&appName=node-rest-shop",
+         "JWT_KEY": "secret"
     }
 }
